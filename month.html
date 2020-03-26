@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Selected month</title>
+    <!--style sheets for jQuery UI Datepicker-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <!--jquery and jquery-ui libraries for jQuery UI Datepicker-->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+
+<h3>Selected month:</h3>
+
+<div id="datepicker"></div>
+
+<script>
+
+    //function parses and returns the parameters from URL address
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    //pick a value (month) from the variable array
+    var month = getUrlVars()["month"];
+    console.log("month: " + month);
+
+    //returns if a value is a string
+    function isString (month) {
+        return typeof month === 'string' || month instanceof String;
+    }
+    console.log("isString (month): " + isString (month));
+
+    //parseInt() function parses a string (month) and returns an integer
+    var month_int=parseInt(month);
+    console.log("month_int: " + month_int);
+
+    //pick a value (year) from the variable array
+    var year = getUrlVars()["year"];
+    console.log("year: " + year);
+
+    //parseInt() function parses a string (year) and returns an integer
+    var year_int=parseInt(year);
+    console.log("year_int: " + year_int);
+
+    //jQuery UI Datepicker
+    $( "#datepicker" ).datepicker({
+        changeMonth: false,  //disable possibility of changing month
+        changeYear: false,   //disable possibility of changing year
+        stepMonths: 0        //set currently selected month, zero months to move
+    });
+
+    //setDate(date) method - sets the date for the datepicker
+    $( "#datepicker" ).datepicker( "setDate", month_int + "/1" + "/" + year_int );
+
+    var txt = "Back";
+    document.write("<p>" + txt.link("WorkingAndFreeDays.php?year=" + year_int) + "</p>" );
+
+</script>
+
+</body>
+</html>
